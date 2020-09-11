@@ -3,7 +3,7 @@
   "disable_existing_loggers": false,
   "formatters": {
     "basic": {
-      "format": "%(asctime)s:%(module)s:%(levelname)s:%(message)s",
+      "format": "%(asctime)s [%(levelname)5s|%(name)s|%(lineno)s] %(message)s",
       "datefmt": "%Y-%m-%d %H:%M:%S"
     }
   },

@@ -3,15 +3,16 @@ import logging
 import logging.config
 
 import configure as cfg
-import lib.hwinfo.gpu as hwinfo
 import inference
+import lib.hwinfo.gpu as hwinfo
 import lib.rabbitmq as rmq
 
-
+logging.addLevelName(logging.WARNING, "WARN")
+logging.addLevelName(logging.CRITICAL, "FATAL")
 logging.config.dictConfig(json.load(open('./logger.json')))
 
 logger = logging.getLogger(__name__)
-logger.info("start inference.executer...")
+logger.error("start inference.executer...")
 
 modelName = rmq.GetQueueOrWaiting()['name']
 

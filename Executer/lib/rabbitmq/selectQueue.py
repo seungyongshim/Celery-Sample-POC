@@ -23,5 +23,5 @@ def GetQueueOrWaiting():
             logger.info('selected queue %r' % queues[-1])
             return queues[-1]
 
-        logger.debug('nothing job...')
+        logger.info('nothing job... wait 5 sec')
         time.sleep(5)

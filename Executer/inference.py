@@ -18,7 +18,7 @@ def loadModel(modelName, limit_memory_percentage = 85):
     global __lastLoadedModel 
     
     if __lastLoadedModel == modelName:
-        logger.info('[x] Model Cached')
+        logger.info('Model Cached')
     else:
         with RedisLock('test'):
             logger.info('Model Loading %r' % modelName)
