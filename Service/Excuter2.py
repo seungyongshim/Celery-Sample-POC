@@ -2,13 +2,22 @@ import requests
 import json
 import time
 import pika
+import nvidia_smi 
+import sys
 
+
+GPU = 0
 HOST = 'localhost'
 PORT = 5672
 ID = 'guest'
 PW = 'guest'
 URL_API = 'http://%s:15672/api/' % HOST 
 TOPIC = 'mls.inference_jobs.tf2.m'
+
+nvidia_smi.nvmlInit()
+handle = nvidia_smi.nvmlDeviceGetHandleByIndex(GPU)
+GPUUUID = nvidia_smi.nvmlDeviceGetUUID(handle)
+dlm = Redlock([{“host”: “localhost”, “port”: 6379, “db”: 0}, ])
 
 def GetRabbitMQListQueues(containTopicName, response):
     return map(lambda x: { 'name':x['name'], 'consumers':x['consumers'], 'messages':x['messages'], 'cost': x['messages'] / (x['consumers'] + 1) }, 
@@ -37,13 +46,23 @@ lastLoadedModel=''
 
 def InferenceMocked(job):
     global lastLoadedModel 
-    if lastLoadedModel == selectedQueue['name']:
-        print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())) + " [x] Received Cached %r" % job)
-        time.sleep(1)
-    else:
-        print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())) + " [x] Received %r" % job)
-        lastLoadedModel = selectedQueue['name']
-        time.sleep(5)
+   
+    
+    def checkUsageGpuMemory():
+        gpuUsage = nvidia_smi.nvmlDeviceGetUtilizationRates(handle)
+        if 85 < gpuUsage.memory: sys.exit()
+
+    def LoadingModel():
+        if lastLoadedModel == selectedQueue['name']:
+            print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())) + " [x] Received Cached %r" % job)
+        else:
+            print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())) + " [x] Received %r" % job)
+            lastLoadedModel = selectedQueue['name']
+            checkUsageGpuMemory()
+            time.sleep(5)
+    
+    LoadingModel()
+    time.sleep(1)
     return True
 
 for m, p, b in channel.consume(selectedQueue['name'], inactivity_timeout=10):
