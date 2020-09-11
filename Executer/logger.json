@@ -24,12 +24,17 @@
       "level": "ERROR",
       "formatter": "basic",
       "filename": "error.log"
-    }
+    },
+    "rabbit": {
+			"level": "DEBUG",
+			"class": "python_logging_rabbitmq.RabbitMQHandler",
+			"host": "localhost"
+		}
   },
   "loggers": {
     "": {
       "level": "DEBUG",
-      "handlers": ["console", "file_debug", "file_error"]
+      "handlers": ["console", "file_debug", "file_error", "rabbit"]
     }
   }
 }
