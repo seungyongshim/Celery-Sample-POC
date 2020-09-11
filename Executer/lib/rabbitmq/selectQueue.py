@@ -20,7 +20,8 @@ def GetQueueOrWaiting():
 
         if queues:
             # 조건) consumer+1로 messages 수를 나눈 값이 가장 큰 queue를 선택한다.
+            logger.info('selected queue %r' % queues[-1])
             return queues[-1]
 
-        logger.info(' nothing job...')
+        logger.debug('nothing job...')
         time.sleep(5)

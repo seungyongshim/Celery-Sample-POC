@@ -5,8 +5,8 @@ __connection = pika.BlockingConnection(pika.ConnectionParameters(cfg.RABBITMQ_HO
 __channel = __connection.channel()
 __channel.basic_qos(prefetch_count=1) 
 
-def consume(selectedQueue):
-    return __channel.consume(selectedQueue['name'], inactivity_timeout=10)
+def consume(modelName):
+    return __channel.consume(modelName, inactivity_timeout=10)
 
 def ack(method):
     __channel.basic_ack(method.delivery_tag)

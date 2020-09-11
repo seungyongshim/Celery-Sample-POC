@@ -3,7 +3,7 @@ import logging
 import logging.config
 
 import configure as cfg
-import hwinfo.gpu as hwinfo
+import lib.hwinfo.gpu as hwinfo
 import inference
 import lib.rabbitmq as rmq
 

@@ -27,15 +27,9 @@
     }
   },
   "loggers": {
-    "__main__": {
+    "": {
       "level": "DEBUG",
-      "handlers": ["console", "file_debug", "file_error"],
-      "propagate": true
-    },
-    "lib": {
-      "level": "DEBUG",
-      "handlers": ["console", "file_debug", "file_error"],
-      "propagate": true
+      "handlers": ["console", "file_debug", "file_error"]
     }
   }
 }

@@ -8,6 +8,7 @@ logger = logging.getLogger(__name__)
 __lastLoadedModel = ''
 
 def loadModel(modelName, limit_memory_percentage = 85):
+    logger.debug('enter loadModel')
     def checkUsageGpuMemory():
         gpuUsage = gpu.gpuUsage()
         if limit_memory_percentage < gpuUsage.memory: 
