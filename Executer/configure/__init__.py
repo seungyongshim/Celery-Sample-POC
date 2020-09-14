@@ -9,5 +9,6 @@ RABBITMQ_API_PORT = os.getenv('RABBITMQ_API_PORT', 15672)
 RABBITMQ_ID = os.getenv('RABBITMQ_ID','guest')
 RABBITMQ_PW = os.getenv('RABBITMQ_PW','guest')
 RABBITMQ_TOPIC = os.getenv('RABBITMQ_TOPIC', 'mls.inference_jobs.tf2')
+RABBITMQ_API_WAITTING = os.getenv('RABBITMQ_API_WAITTING', 5)
 
 RABBITMQ_API_URL = 'http://%s:%d/api/' % (RABBITMQ_API_HOST, RABBITMQ_API_PORT)

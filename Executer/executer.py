@@ -12,7 +12,7 @@ logging.addLevelName(logging.CRITICAL, "FATAL")
 logging.config.dictConfig(json.load(open('./logger.json')))
 
 logger = logging.getLogger(__name__)
-logger.error("start inference.executer...")
+logger.info("start inference.executer...", extra= {'job_uuid' : 'test112233'})
 
 modelName = rmq.GetQueueOrWaiting()['name']
 

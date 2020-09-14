@@ -23,5 +23,5 @@ def GetQueueOrWaiting():
             logger.info('selected queue %r' % queues[-1])
             return queues[-1]
 
-        logger.info('nothing job... wait 5 sec')
+        logger.info('nothing job... wait %d sec' % cfg.RABBITMQ_API_WAITTING)
         time.sleep(5)

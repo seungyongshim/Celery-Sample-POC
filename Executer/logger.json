@@ -27,8 +27,11 @@
     },
     "rabbit": {
 			"level": "DEBUG",
-			"class": "python_logging_rabbitmq.RabbitMQHandler",
-			"host": "localhost"
+			"class": "python_logging_rabbitmq.RabbitMQHandlerOneWay",
+      "host": "localhost",
+      "port": "5672",
+      "username": "guest",
+      "password": "guest"
 		}
   },
   "loggers": {

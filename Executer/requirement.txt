@@ -1,0 +1,5 @@
+nvidia-ml-py==375.53.1
+pika==1.1.0
+redis==3.5.3
+requests==2.24.0
+python-logging-rabbitmq==2.0.0
